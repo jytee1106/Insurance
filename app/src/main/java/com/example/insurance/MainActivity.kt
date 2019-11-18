@@ -29,13 +29,42 @@ class MainActivity : AppCompatActivity(),
 
     private fun calculatePremium() {
         val position = spinnerAge.selectedItemPosition
+        val age = spinnerAge.getChildAt(position)
         val gender = radioGroupGender.checkedRadioButtonId
+        var basic_premium: Int = 0
+
+        basic_premium = when(position){
+            0 -> 60
+            1 -> 70
+            2 -> 90
+            3 -> 120
+            else -> 150
+        }
+
+
         if(gender == R.id.radioButtonMale){
             //TODO calculate premium for male
+            when (position){
+                0 -> basic_premium
+                1 -> basic_premium + 50
+                2 -> basic_premium + 100
+                3 -> basic_premium + 150
+                else -> basic_premium + 200
+            }
         }
 
         if(checkBoxSmoker.isChecked){
             //TODO calculate premium for smoke
+            when (position){
+                0 -> basic_premium
+                1 -> basic_premium + 100
+                2 -> basic_premium + 150
+                3 -> basic_premium + 200
+                4 -> basic_premium + 250
+                5 -> basic_premium + 300
+            }
         }
+
+        textViewInsurancePremium.text = String.format("%s %d",getString(R.string.),)
     }
 }
