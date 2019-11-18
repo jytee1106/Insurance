@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(),
     AdapterView.OnItemSelectedListener {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(),
         val age = spinnerAge.getChildAt(position)
         val gender = radioGroupGender.checkedRadioButtonId
         var basic_premium: Int = 0
+        val symbol = Currency.getInstance(Locale.getDefault()).symbol
 
         basic_premium = when(position){
             0 -> 60
@@ -46,10 +48,10 @@ class MainActivity : AppCompatActivity(),
             //TODO calculate premium for male
             when (position){
                 0 -> basic_premium
-                1 -> basic_premium + 50
-                2 -> basic_premium + 100
-                3 -> basic_premium + 150
-                else -> basic_premium + 200
+                1 -> basic_premium += 50
+                2 -> basic_premium += 100
+                3 -> basic_premium += 150
+                else -> basic_premium += 200
             }
         }
 
@@ -57,14 +59,14 @@ class MainActivity : AppCompatActivity(),
             //TODO calculate premium for smoke
             when (position){
                 0 -> basic_premium
-                1 -> basic_premium + 100
-                2 -> basic_premium + 150
-                3 -> basic_premium + 200
-                4 -> basic_premium + 250
-                5 -> basic_premium + 300
+                1 -> basic_premium += 100
+                2 -> basic_premium += 150
+                3 -> basic_premium += 200
+                4 -> basic_premium += 250
+                5 -> basic_premium += 300
             }
         }
 
-        textViewInsurancePremium.text = String.format("%s %d",getString(R.string.),)
+        textViewInsurancePremium.text = String.format("%s %s %d",getString(R.string.insurance_premium),symbol,basic_premium)
     }
 }
